@@ -1,8 +1,10 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Proyecto QuioscoApp: Next.js 13, Tailwindcss, Prisma
 
-## Getting Started
+Este es un repositorio para una aplicacion de un quiosco de comida donde se actualizan las orden en tiempo real esta contruido bajo las siguientes tecnologias:
 
-First, run the development server:
+- Nextjs 13
+- Tailwindcss
+- Prisma
 
 ```bash
 npm run dev
