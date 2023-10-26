@@ -63,3 +63,7 @@ npx prisma db seed
 ```
 
 > **NOTA:** El archivo `seed` es el que va a poblar la base de datos esta en la carpeta `prisma` en la raiz.
+
+## Consepto de Higher Loading
+
+Carga de datos masivos por cosulta en este caso por archivo

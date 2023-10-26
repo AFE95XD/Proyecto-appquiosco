@@ -5,8 +5,12 @@ import { PrismaClient } from "@prisma/client";
 
 export default async function handler(req, res) {
   const prisma = new PrismaClient();
-  const categorias = await prisma.categoria.findMany({
-    include: { productos: true },
+  //? Para traer las categorias de los productos
+  const productos = await prisma.producto.findMany({
+    where: {
+      categoriaId: 1,
+    },
   });
-  res.status(200).json(categorias);
+  // console.log(productos);
+  res.status(200).json(productos);
 }
