@@ -5,6 +5,7 @@ import Image from "next/image";
 const Producto = ({ producto }) => {
   const { handleSetProducto, handleChangeModal } = useQuiosco();
   const { nombre, imagen, precio } = producto;
+
   return (
     <div className="border p-3">
       <Image

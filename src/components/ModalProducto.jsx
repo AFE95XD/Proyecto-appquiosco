@@ -1,11 +1,31 @@
 import { formatearDinero } from "@/helpers";
 import useQuiosco from "@/hooks/useQuiosco";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const ModalProducto = ({}) => {
-  const { producto, handleChangeModal } = useQuiosco();
+const ModalProducto = () => {
+  const { producto, handleChangeModal, handleAgregarPedido, pedido } =
+    useQuiosco();
   const [cantidad, setCantidad] = useState(1);
+  const [edicion, setEdicion] = useState(false);
+
+  // console.log({ producto: producto });
+  // console.log({ pedido: pedido });
+
+  // console.log(typeof cantidad);
+  // console.log(cantidad);
+  // Comprobar si el Modal Actual esta en el pedido
+
+  useEffect(() => {
+    // console.log("hizo efect en modal producto");
+    if (pedido.some((pedidoState) => pedidoState.id === producto.id)) {
+      const productoEdicion = pedido.find(
+        (pedidoState) => pedidoState.id === producto.id
+      );
+      setEdicion(true);
+      setCantidad(productoEdicion.cantidad);
+    }
+  }, [producto, pedido]);
 
   return (
     <div className="md:flex gap-10">
@@ -19,6 +39,7 @@ const ModalProducto = ({}) => {
       </div>
 
       <div className="md:w-2/3">
+        {/* BOTON PARA CERRRAR EL MODAL */}
         <div className="flex justify-end">
           <button onClick={handleChangeModal}>
             <svg
@@ -43,7 +64,7 @@ const ModalProducto = ({}) => {
           {formatearDinero(producto.precio)}
         </p>
 
-        <div className="flex gap-4 mt-5">
+        <div className="flex items-center gap-4 mt-5">
           <button
             type="button"
             onClick={() => {
@@ -92,6 +113,13 @@ const ModalProducto = ({}) => {
             </svg>
           </button>
         </div>
+        <button
+          type="button"
+          className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
+          onClick={() => handleAgregarPedido({ ...producto, cantidad })}
+        >
+          {edicion ? "Guardar Cambios" : "Añadir Cambios"}
+        </button>
       </div>
     </div>
   );
